@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- <context:component-scan base-package="com.my.begin" /> -->
+	<context:component-scan base-package="jun.com.information" />
+	<!-- 일일이 빈등록 안하고 빈클래스에 @Component를 이용해 빈 등록 가능 -->	
+	<!-- 상위 패키지를 선택하시면 됩니다. 선택된 패키지 및 하위 패키지 전부 스캔 -->	
+	<!--  autowired할 클래스에 @component로 표시 -->
+	<!-- 다만, Controller, Service 클래스에는 이미 @Controller 라는 Annotation이 있으므로 등록하지 않아도 된다. @Controller, @Service가 이미 @Component를 상속하기 있기 때문이다 -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<!-- resource 폴더 아래부분에 *.png, *.css, *.js 등등 정적자원에 접근할때 dispatcherServlet를 거쳐 controller로 가서 처리하는게 아니라 바로 접근가능하게 지정 -->
+	<!-- ex) /resources/test.css 라고 요청이 들어오면  /resources/test.css 위치로 바로 옮긴다-->
+	
+	<!-- @@@추가 변경 작업해야함 한개한개 떨어지는거로 변경 -->
+	<!--javascript/jquery
+ 	<resources mapping="/js/**"  location="/resources/js/" />
+		css
+ 	<resources mapping="/css/**"  location="/resources/css/" /> -->
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	<!-- jsp include 를 사용했다면 include 당하는 쪽의 jsp 페이지에 아래 지시문을 적어주어야 한글이 깨지지 않는다. 
+	<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> --> 
+	
+	<!-- @@나중에 따로 분리 작업 추가 해야함 -->
+	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/intro"/>
+        <beans:property name="username" value="root"/>
+        <beans:property name="password" value="1234"/>
+    </beans:bean>
+
+    <beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="dataSource" />
+    </beans:bean>
+    
+    <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="configLocation" value="classpath:/mybatis/config/Mapper-config.xml"/><!-- 여기서 클래스패스는 resource부터 시작한다 -->
+    </beans:bean>
+
+    <beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <beans:constructor-arg ref="sqlSessionFactory"/>
+    </beans:bean>
+	
+	
+</beans:beans>

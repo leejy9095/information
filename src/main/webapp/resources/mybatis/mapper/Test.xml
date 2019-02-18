@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.my.begin.dao.board.BoardDAOMapper">
+<!-- 인터페이스를 작성하고 인터페이스의 함수위에 에노테이션을 이용해 sql문을 등록해두면 sqlSession으
+로부터 getMapper메소드에 인터페이스정보를 넘기면 인터페이스의 각 함수는 자기 위해 등록된 sql을 호출
+해주는 방식
+ -->
+    <resultMap type="com.my.begin.model.Board" id="MemberResultMap">
+        <result property="boardIndex" column="board_index" /><!--property가 클래스고 뒤에 컬럼이 db이다-->
+        <result property="boardTitle" column="board_title" />
+        <result property="boardContent" column="board_content" />
+        <result property="boardDate" column="board_date" />
+    </resultMap>
+
+    <select id="findAll" resultMap="MemberResultMap">
+        SELECT * FROM board
+     </select> 
+	
+	<select id="selectCountAll" resultType="java.lang.Integer">
+        SELECT count(board_index) FROM board
+     </select> 
+	
+	<select id="selectAllLimit" resultMap="MemberResultMap">
+        SELECT * FROM board LIMIT #{boardStartNum}, #{boardEndNum}
+     </select> 
+	
+    <select id="selectByBoardIndex" parameterType="Integer" resultMap="MemberResultMap">
+    	SELECT * FROM board WHERE board_index=#{boardIndex}
+    </select>
+
+    <insert id="insertByBoardIndex" parameterType="java.util.HashMap">
+    	INSERT INTO board(board_title,board_content) VALUES(#{boardMap.boardTitle},#{boardMap.boardContent})
+    </insert>
+    
+	<update id="updateByBoardIndex" parameterType="java.util.HashMap">
+		UPDATE board set board_title = #{boardMap.boardTitle}, board_content = #{boardMap.boardContent} WHERE board_index = #{boardMap.boardIndex} LIMIT 1;
+	</update>
+	
+</mapper>
