@@ -8,7 +8,7 @@
 	<!-- 그 레이아웃에 put-attribute 를 넣는 방식 -->
 	
     <!-- (1) 레이아웃을 적용하지않는화면-->    
-    <definition name=".login" template="/WEB-INF/jsp/tileLayout/loginLayout.jsp">
+    <definition name=".login" template="/WEB-INF/tiles/layout/loginLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
         <put-attribute name="menu" value="" />        
@@ -16,7 +16,7 @@
     </definition>
  
     <!-- (2) 레이아웃을 적용하는화면-->
-    <definition name=".root" template="/WEB-INF/jsp/tileLayout/baseLayout.jsp">
+    <definition name=".root" template="/WEB-INF/tiles/layout/baseLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
         <put-attribute name="menu" value="/WEB-INF/jsp/tilesView/menu.jsp" />        
