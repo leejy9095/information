@@ -7,7 +7,7 @@
 	<!-- template 속성이 기본적이 틀의 레이아웃 jsp이다 -->
 	<!-- 그 레이아웃에 put-attribute 를 넣는 방식 -->
 	
-    <!-- (1) 레이아웃을 적용하지않는화면-->    
+    <!-- (1) 레이아웃을 적용하지않는화면-->    <!-- name과 밑에 definition의 extends를 맞춰준다 -->
     <definition name=".login" template="/WEB-INF/tiles/layout/loginLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/jsp/tilesView/header.jsp" />
@@ -23,12 +23,12 @@
         <put-attribute name="footer" value="/WEB-INF/jsp/tilesView/footer.jsp" />
     </definition>
     
-    <!-- (1) -->    
+    <!-- (1) -->    <!-- *를 {1}로 치환한다 -->	<!-- extends와 위에 레이아웃의 name을 맞춰준다 -->		<!-- 조건으로 나눠줄경우 사용 -->
     <definition name="/login/*" extends=".login">
       <put-attribute name="body" value="/WEB-INF/jsp/login/{1}.jsp" />
     </definition>
  
-    <!-- (2) -->
+    <!-- (2) -->	<!-- */* 를 순서대로{1}과 {2}로 치환한다 -->
    <definition name="/*/*" extends=".root">      
       <put-attribute name="body" value="/WEB-INF/jsp/{1}/{2}.jsp" />
     </definition>
