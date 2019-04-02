@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Example Explosion</title>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>
+<%@ include file="/WEB-INF/include/include-header.jspf" %>	<!-- 여기변경 -->
 </head>
 <body>
                 
