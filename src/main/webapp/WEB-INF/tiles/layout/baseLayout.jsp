@@ -6,7 +6,6 @@
 <html>
 <head>
 <title>Explosion</title>
-<%@ include file="/WEB-INF/include/include-header.jspf" %>	<!-- 여기변경 -->
 </head>
 <body class="wrapper">
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">        

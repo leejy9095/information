@@ -3,10 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<welcome-file-list>
+		<welcome-file>/index.jsp</welcome-file>
+	</welcome-file-list>
+
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>		<!-- 초기화 파라미터를 선언하는데 사용 -->
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>classpath:/spring/root-context.xml</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -20,7 +24,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>	<!-- DispatcherServlet은 클라이언트 요청을 앞단에서 핸들링 하려고 사용 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>	<!-- DispatcherServlet이 요청을 가로채서 이 경로에있는 파일 실행  -->
+			<param-value>classpath:/spring/appServlet/servlet-context.xml</param-value>	<!-- DispatcherServlet이 요청을 가로채서 이 경로에있는 파일 실행  -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
