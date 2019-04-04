@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.my.begin.dao.board.BoardDAOMapper">
-인터페이스를 작성하고 인터페이스의 함수위에 에노테이션을 이용해 sql문을 등록해두면 sqlSession으
+<!-- 인터페이스를 작성하고 인터페이스의 함수위에 에노테이션을 이용해 sql문을 등록해두면 sqlSession으
 로부터 getMapper메소드에 인터페이스정보를 넘기면 인터페이스의 각 함수는 자기 위해 등록된 sql을 호출
 해주는 방식
 
@@ -22,6 +22,6 @@
 	<select id="selectCountAll" resultType="java.lang.Integer">
         SELECT count(board_index) FROM board
      </select> 
-	
+	 -->
 
 </mapper>
