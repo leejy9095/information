@@ -1,13 +1,26 @@
 package jun.com.information.com.crawling;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class crawling {
+	
+	static public String[] getData() throws Exception {
+			
+		// 1. URL ì„ ì–¸
+	    String connUrl = "http://map.daum.net";
+	    
+	    // 2. HTML ê°€ì ¸ì˜¤ê¸°
+	    Document doc = Jsoup.connect(connUrl).post();
+	    //String docVal = doc.toString();
+	
+	    Elements element = doc.select(".tbl_weather tbody>tr:nth-child(1)");
+	    String[] str = element.text().split(" ");
 
-	String url ="http://www.kma.go.kr/";	//url ÁöÁ¤
+	    
+	    return str;
+	}	
 	
-	Document doc = Jsoup.connect(url).get();   //connect
-	
-	return "";
 	
 }
